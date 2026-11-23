@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="ריכוז ההמלצות של החבר'ה הישראלים בדה נאנג.">
+<meta name="theme-color" content="#0B2545">
+<title>המלצות דה נאנג</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: RTL. Navy header band carries the title and category tabs; cards below. */
+:root{
+  --bg:#F3F7FD; --surface:#FFFFFF; --surface-2:#EAF1FC; --line:#D8E3F4;
+  --fg:#0E1B30; --muted:#5A6E8C; --accent:#1457D6; --accent-ink:#FFFFFF;
+  --accent-soft:#E2ECFE; --header:#0B2545; --warm:#B2590F; --danger:#B3261E;
+  --shadow:0 1px 2px rgba(11,37,69,.05),0 10px 28px rgba(11,37,69,.06);
+  --font:'Heebo',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A1220; --surface:#121D30; --surface-2:#1A2740; --line:#26354F;
+  --fg:#E6EDF9; --muted:#93A5C2; --accent:#74A6FF; --accent-ink:#07182C;
+  --accent-soft:#17294A; --header:#071529; --warm:#E5A05B; --danger:#F2857C;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0A1220; --surface:#121D30; --surface-2:#1A2740; --line:#26354F;
+  --fg:#E6EDF9; --muted:#93A5C2; --accent:#74A6FF; --accent-ink:#07182C;
+  --accent-soft:#17294A; --header:#071529; --warm:#E5A05B; --danger:#F2857C;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15.5px;line-height:1.6;padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1120px;margin:0 auto}
+h1,h2,h3{text-wrap:balance;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+header.top{position:sticky;top:0;z-index:20;background:var(--header);color:#fff;padding-top:env(safe-area-inset-top,0px)}
+header.top .brand h1{color:#fff}
+header.top .btn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.26);color:#fff}
+header.top .btn:hover{background:rgba(255,255,255,.18)}
+header.top .btn-primary{background:#fff;color:var(--header);border-color:#fff;font-weight:600}
+header.top .btn-primary:hover{background:#fff;filter:brightness(.95)}
+header.top .btn-ghost{background:transparent;border-color:transparent;color:rgba(255,255,255,.72);font-size:14px;padding:8px 10px}
+header.top .btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.top-in{display:flex;align-items:center;gap:10px;padding-block:11px}
+.brand{display:flex;flex-direction:column;gap:1px;min-width:0;text-decoration:none}
+.brand h1{font-size:18px;font-weight:700}
+.brand span{font-size:12.5px;color:rgba(255,255,255,.66)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 15px;cursor:pointer;font-weight:500;white-space:nowrap}
+.btn:hover{background:var(--surface-2)}
+.btn-primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.btn-primary:hover{filter:brightness(1.08);background:var(--accent)}
+.btn-sm{padding:5px 12px;font-size:13.5px}
+.btn-danger{color:var(--danger);border-color:var(--danger)}
+.spacer{flex:1}
+.hide-narrow{display:none}
+@media(min-width:820px){.hide-narrow{display:block}}
+nav.cats{border-top:1px solid rgba(255,255,255,.13);overflow-x:auto;scrollbar-width:none}
+nav.cats::-webkit-scrollbar{display:none}
+.navrow{display:flex;gap:2px;white-space:nowrap}
+nav.cats a{display:block;padding:12px 13px 10px;font-size:14.5px;font-weight:500;text-decoration:none;color:rgba(255,255,255,.7);border-bottom:2px solid transparent}
+nav.cats a:hover{color:#fff}
+nav.cats a[aria-current="page"]{color:#fff;border-bottom-color:#fff;font-weight:600}
+.adminbar{background:var(--accent-soft);border-bottom:1px solid var(--line);font-size:13.5px}
+.adminbar .wrap{padding-block:8px;display:flex;align-items:center;gap:10px}
+.adminbar b{font-weight:600}
+
+.controls{padding-block:18px 2px}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 13px;box-shadow:var(--shadow);max-width:460px}
+.search input{border:0;background:transparent;padding:12px 0;width:100%;min-width:0;outline:none}
+.search svg{flex:none;color:var(--muted)}
+.chiprow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.chiprow .lbl{font-size:13.5px;color:var(--muted);font-weight:600;margin-inline-end:3px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:14px;cursor:pointer}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.clear{background:none;border:0;color:var(--accent);cursor:pointer;font-size:13.5px;font-weight:600;padding:6px 2px;text-decoration:underline}
+.pagehead{margin:22px 0 2px}
+.pagehead h2{font-size:26px;font-weight:700;letter-spacing:-.01em}
+.pagehead p{color:var(--muted);font-size:14.5px;margin:4px 0 0}
+.meta{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:16px 0 10px}
+.count{font-size:14.5px;font-weight:600}
+.count em{font-style:normal;color:var(--muted);font-weight:500}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;padding-bottom:36px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;display:flex;flex-direction:column;gap:5px;box-shadow:var(--shadow)}
+.tile:hover{border-color:var(--accent);box-shadow:0 1px 2px rgba(11,37,69,.05),0 14px 32px rgba(20,87,214,.12)}
+.tile h3{font-size:17.5px;font-weight:600}
+.tile .n{font-size:13px;color:var(--accent);font-weight:600}
+.tile p{margin:0;font-size:13.5px;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(282px,1fr));gap:12px;padding-bottom:40px;align-items:start}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px;display:flex;flex-direction:column;gap:9px;min-width:0;box-shadow:var(--shadow)}
+.card.fresh{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.card.hid{opacity:.6;border-style:dashed}
+.card h3{font-size:17px;font-weight:600;min-width:0;overflow-wrap:anywhere}
+.kicker{display:flex;gap:7px;align-items:center;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:0}
+.cat{color:var(--accent);font-weight:600;font-size:12.5px}
+.hidflag{color:var(--warm);font-weight:600;font-size:12.5px}
+.newflag{background:var(--accent);color:var(--accent-ink);font-weight:600;font-size:11.5px;border-radius:999px;padding:2px 9px}
+#latest .pagehead{margin-top:10px}
+.contact{color:var(--accent);font-weight:600;text-decoration:none}
+.contact:hover{text-decoration:underline}
+.note-text{font-size:14.5px;color:var(--fg);overflow-wrap:anywhere;margin:0}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.t{font-size:12.5px;background:var(--surface-2);border-radius:999px;padding:3px 10px;color:var(--muted)}
+.t.hit{background:var(--accent-soft);color:var(--fg);font-weight:600}
+.cardfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:9px;margin-top:auto;font-size:13px;color:var(--muted)}
+.byline{display:flex;gap:5px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.cardfoot a{color:var(--accent);font-weight:600;text-decoration:none}
+.cardfoot a:hover{text-decoration:underline}
+.cbtn{background:none;border:0;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;padding:0;text-align:start}
+.threads{display:flex;flex-direction:column;gap:9px;border-top:1px dashed var(--line);padding-top:9px}
+.cmt{background:var(--surface-2);border-radius:10px;padding:9px 12px}
+.cmt .who{font-size:12px;color:var(--muted);font-weight:600;display:flex;gap:7px;align-items:baseline;flex-wrap:wrap}
+.cmt p{margin:3px 0 0;font-size:14px;overflow-wrap:anywhere}
+.cmt .del{background:none;border:0;color:var(--danger);font-size:12px;cursor:pointer;padding:0;margin-inline-start:auto;font-weight:600}
+.cform{display:flex;flex-direction:column;gap:7px}
+.cform .ask{font-size:13px;color:var(--muted)}
+.cform input,.cform textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%}
+.cform textarea{resize:vertical;min-height:64px}
+.adminrow{display:flex;gap:7px;align-items:center;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:9px}
+.adminrow .q{font-size:13px;color:var(--danger);font-weight:600;margin-inline-end:auto}
+.empty{border:1px dashed var(--line);border-radius:14px;padding:36px 20px;text-align:center;color:var(--muted);grid-column:1/-1}
+.empty h3{font-size:16.5px;color:var(--fg);margin-bottom:6px}
+
+.prose{max-width:62ch;padding-bottom:44px}
+.prose h3{font-size:18px;font-weight:700;margin:26px 0 6px}
+.prose p{margin:0 0 10px;font-size:15.5px}
+.prose ul{margin:0 0 10px;padding-inline-start:22px}
+.prose li{margin-bottom:5px}
+.prose .lead{font-size:17px}
+
+.pagefoot{display:flex;gap:9px;align-items:center;justify-content:center;flex-wrap:wrap;padding-block:4px 34px;font-size:13.5px;color:var(--muted)}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;padding:2px;text-decoration:underline}
+
+.fb{display:flex;flex-direction:column;gap:9px;padding-bottom:40px}
+.fbitem{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow)}
+.fbitem.done{opacity:.55}
+.fbtop{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.fbkind{font-weight:600;color:var(--accent)}
+.fbkind.bug{color:var(--danger)}
+
+.scrim{position:fixed;inset:0;background:rgba(7,21,41,.5);z-index:40;display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:620px){.scrim{align-items:center}}
+.sheet{background:var(--surface);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:16px 16px 0 0;border:1px solid var(--line);
+  padding:18px max(18px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(18px,env(safe-area-inset-left,0px))}
+@media(min-width:620px){.sheet{border-radius:16px}}
+.sheet h2{font-size:19px;font-weight:700;margin-bottom:2px}
+.sheet .sub{font-size:13.5px;color:var(--muted);margin-bottom:14px}
+.bar{background:var(--accent-soft);border-radius:10px;padding:11px 13px;font-size:14px;margin-bottom:15px}
+.bar b{font-weight:600}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.field label{font-size:13.5px;font-weight:600;color:var(--fg)}
+.field input,.field select,.field textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.field textarea{resize:vertical;min-height:74px}
+.two{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.even{grid-template-columns:1fr 1fr}
+@media(max-width:460px){.two{grid-template-columns:1fr}}
+.hint{font-size:12px;color:var(--muted)}
+.sheetfoot{display:flex;gap:9px;justify-content:flex-end;margin-top:6px;align-items:center;flex-wrap:wrap}
+.confirm{position:fixed;inset:0;z-index:60;background:rgba(7,21,41,.6);display:flex;align-items:center;justify-content:center;
+  padding:max(24px,env(safe-area-inset-left,0px)) max(24px,env(safe-area-inset-right,0px))}
+.confirmbox{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);max-width:340px;width:100%;padding:20px}
+.confirmbox h2{font-size:17.5px;font-weight:700;margin-bottom:4px}
+.confirmbox p{margin:0 0 16px;font-size:14.5px;color:var(--muted)}
+.confirmfoot{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(22px + env(safe-area-inset-bottom,0px));background:var(--header);color:#fff;
+  padding:11px 19px;border-radius:999px;font-weight:600;font-size:14.5px;z-index:70;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+@media (prefers-reduced-motion:no-preference){.toast{animation:pop .22s ease}@keyframes pop{from{opacity:0;transform:translate(-50%,8px)}}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#/">
+      <h1>המלצות דה נאנג</h1>
+      <span>מהחבר'ה, לא מבעלי העסקים</span>
+    </a>
+    <div class="spacer"></div>
+    <button class="btn btn-ghost hide-narrow" id="bugBtn">דיווח על תקלה</button>
+    <button class="btn btn-ghost hide-narrow" id="ideaBtn">רעיון לשיפור</button>
+    <button class="btn" id="themeBtn" title="מצב כהה או בהיר" aria-label="מצב כהה או בהיר">◐</button>
+    <button class="btn btn-primary" id="addBtn">+ הוספה</button>
+  </div>
+  <nav class="cats" aria-label="קטגוריות"><div class="wrap navrow" id="nav"></div></nav>
+</header>
+<div class="adminbar" id="adminbar" hidden><div class="wrap">
+  <span><b>מצב ניהול.</b> <span id="adminWho"></span></span>
+  <button class="linkbtn" id="inboxBtn" hidden></button>
+  <div class="spacer"></div>
+  <button class="btn btn-sm" id="signOutBtn">יציאה</button>
+</div></div>
+
+<main class="wrap" id="view"></main>
+<footer class="wrap pagefoot">
+  <button class="linkbtn" id="aboutBtn">על האתר</button><span>·</span>
+  <button class="linkbtn" id="bugBtn2">דיווח על תקלה</button><span>·</span>
+  <button class="linkbtn" id="ideaBtn2">רעיון לשיפור</button>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB_URL="https://zviavfxviwmhizurknnn.supabase.co";
+const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp2aWF2Znh2aXdtaGl6dXJrbm5uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxNDAzOTUsImV4cCI6MjEwNzcxNjM5NX0.4LKpOvzEDRIw-9MyhoMQZlQGCp9YFIaFboKDLcNJe3M";
+const db=window.supabase.createClient(SB_URL,SB_KEY);
+document.documentElement.setAttribute("dir","rtl");
+document.documentElement.setAttribute("lang","he");
+
+const CATEGORIES=[
+ {name:"Food & drink",slug:"food",nav:"אוכל",he:"אוכל ושתייה",blurb:"מסעדות, מאפיות ומקומות שעושים משלוחים.",
+  tags:["Breakfast","Brunch","Dinner","Street food","Delivery","Healthy","Vegan","Vegetarian","Israeli","Burgers","Vietnamese","Uzbek","Indian","Italian / pizza","Japanese","Korean","Seafood","Meat","High protein","American","Desserts","Ice cream","Bakery","Good value"]},
+ {name:"Cafés & workspaces",slug:"cafes",nav:"בתי קפה",he:"בתי קפה ומקומות לעבוד בהם",blurb:"איפה באמת אפשר לשבת ולעבוד.",
+  tags:["Good for work","Coworking","A/C","Power outlets","Fast wifi","Quiet","Open 24/7","Outdoor seating","Food menu","Coffee only","Specialty coffee","Good value"]},
+ {name:"Groceries & shops",slug:"shops",nav:"קניות",he:"סופרים וקניות",blurb:"סופרים, שווקים ואיפה קונים דברים.",
+  tags:["Supermarket","Mini-market","Market","Mall","Big selection","Meat","Meat & fish","Electronics","Phones","Chocolate","Snacks","Local maker","Delivery","Good value"]},
+ {name:"Services & community",slug:"services",nav:"שירותים",he:"שירותים וקהילה",blurb:"ניקיון, אחסון, סים, תופרת וקבוצות.",
+  tags:["Cleaning","Laundry","Babysitting","Storage","Tailor","SIM & data","Telegram group","App","English spoken","Guide / list"]},
+ {name:"Visas & immigration",slug:"visas",nav:"ויזות",he:"ויזות",blurb:"סוכנים, ויזה ראן וחידושים.",
+  tags:["Visa agent","Visa run","Laos border","Visa help","Hebrew speaking"]},
+ {name:"Money & ATMs",slug:"money",nav:"כסף",he:"כספומטים, החלפת כסף ותשלומים",blurb:"תקרות משיכה, עמלות, שערים ואפליקציות לתשלום ב-QR.",
+  tags:["ATM","Currency exchange","Payment app","QR payments","High limit","Low fee","Best rate","Fees","Withdrawal limits"]},
+ {name:"Activities & trips",slug:"activities",nav:"פעילויות",he:"פעילויות וטיולים",blurb:"חוגים, חדרי כושר, ספורט ומקומות לצאת אליהם.",
+  tags:["Martial arts","Gym","Yoga","Dance","Tennis","Football","Day trip","Nature","Beginner friendly","Weekly","Kids","Motorbike needed"]},
+ {name:"Transport & rentals",slug:"transport",nav:"תחבורה",he:"תחבורה והשכרות",blurb:"אופנועים, רכבים ונהגים.",
+  tags:["Motorbike rental","Car rental","Driver","Airport transfer","Good value"]},
+ {name:"Stays",slug:"stays",nav:"לינה ותיווך",he:"לינה ותיווך",blurb:"דירות, מקומות לגור בהם ומתווכים ששווה לעבוד איתם.",
+  tags:["Broker / agent","Apartments","Hotel","Monthly rental","Short stay","Pool","Gym","Kitchen","Pet friendly","Quiet"]},
+ {name:"Health & Beauty",slug:"health",nav:"בריאות ויופי",he:"בריאות ויופי",blurb:"רופאי שיניים, מרפאות, בתי מרקחת, שיער, ציפורניים ומסאז'.",
+  tags:["Dental","Pharmacy","Hospital","Clinic","Dermatology","Travel clinic","Women's health","Hair","Nails","Skin / facial","Massage","English spoken","Good value"]}
+];
+const TAG_HE={"Breakfast":"ארוחת בוקר","Brunch":"בראנץ'","Dinner":"ארוחת ערב","Street food":"אוכל רחוב","Delivery":"משלוחים","Healthy":"בריא","Vegan":"טבעוני","Vegetarian":"צמחוני","Israeli":"ישראלי","Burgers":"המבורגרים","Vietnamese":"ויאטנמי","Uzbek":"אוזבקי","Indian":"הודי","Italian / pizza":"איטלקי","Japanese":"יפני","Korean":"קוריאני","Seafood":"פירות ים","Meat":"בשרי","High protein":"עתיר חלבון","American":"אמריקאי","Desserts":"קינוחים","Ice cream":"גלידה","Bakery":"מאפייה","Good value":"מחיר טוב","Good for work":"טוב לעבודה","Coworking":"קו-וורקינג","A/C":"מיזוג","Power outlets":"שקעים","Fast wifi":"אינטרנט מהיר","Quiet":"שקט","Open 24/7":"פתוח 24/7","Outdoor seating":"ישיבה בחוץ","Food menu":"יש אוכל","Coffee only":"קפה בלבד","Specialty coffee":"קפה ספשיאלטי","Supermarket":"סופרמרקט","Mini-market":"מכולת","Market":"שוק","Mall":"קניון","Big selection":"מבחר גדול","Meat & fish":"בשר ודגים","Electronics":"אלקטרוניקה","Phones":"טלפונים","Chocolate":"שוקולד","Snacks":"חטיפים","Local maker":"תוצרת מקומית","Cleaning":"ניקיון","Laundry":"כביסה","Babysitting":"בייביסיטר","Storage":"אחסון","Tailor":"תופרת","SIM & data":"סים ודאטה","Telegram group":"קבוצת טלגרם","App":"אפליקציה","English spoken":"דוברים אנגלית","Guide / list":"ריכוז המלצות","Visa agent":"סוכן ויזות","Visa run":"ויזה ראן","Laos border":"גבול לאוס","Visa help":"ייעוץ ויזות","Hebrew speaking":"דוברי עברית","ATM":"כספומט","Currency exchange":"החלפת כסף","Payment app":"אפליקציית תשלום","QR payments":"תשלום ב-QR","High limit":"תקרה גבוהה","Low fee":"עמלה נמוכה","Best rate":"שער טוב","Fees":"עמלות","Withdrawal limits":"תקרת משיכה","Martial arts":"אומנויות לחימה","Gym":"חדר כושר","Yoga":"יוגה","Dance":"ריקוד","Tennis":"טניס","Football":"כדורגל","Day trip":"טיול יום","Nature":"טבע","Beginner friendly":"מתאים למתחילים","Weekly":"שבועי","Kids":"לילדים","Motorbike needed":"צריך אופנוע","Motorbike rental":"השכרת אופנוע","Car rental":"השכרת רכב","Driver":"נהג","Airport transfer":"הסעה לשדה","Broker / agent":"מתווך","Apartments":"דירות","Hotel":"מלון","Monthly rental":"שכירות חודשית","Short stay":"לטווח קצר","Pool":"בריכה","Kitchen":"מטבח","Pet friendly":"מקבלים חיות","Dental":"רפואת שיניים","Pharmacy":"בית מרקחת","Hospital":"בית חולים","Clinic":"מרפאה","Dermatology":"עור","Travel clinic":"רפואת מטיילים","Women's health":"רפואת נשים","Hair":"שיער","Nails":"ציפורניים","Skin / facial":"טיפולי פנים","Massage":"מסאז'"};
+const tagHe=t=>TAG_HE[t]||t;
+
+const bySlug=s=>CATEGORIES.find(c=>c.slug===s);
+const byName=n=>CATEGORIES.find(c=>c.name===n);
+const catHe=n=>{const c=byName(n);return c?c.he:n};
+
+let places=[],comments={},feedback=[],loadErr=null,route="home",admin=false,who="",pendingDelete=null,openThreads=new Set();
+const state={q:"",tags:new Set()};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const isMaps=u=>/goo\.gl|google\.[a-z.]+\/maps|maps\.app/.test(u||"");
+const inCat=c=>places.filter(p=>p.category===c.name);
+const NEW_DAYS=7, NEW_MAX=5;
+function isRecent(pl){
+  if(pl.imported||!pl.created_at)return false;
+  const age=Date.now()-new Date(pl.created_at).getTime();
+  return age>=0 && age<NEW_DAYS*86400000;
+}
+function recentPlaces(){
+  return places.filter(p=>p.status!=="hidden"&&!p.imported&&p.created_at)
+    .sort((a,b)=>(b.created_at||"").localeCompare(a.created_at||"")).slice(0,NEW_MAX);
+}
+const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+function niceDate(s){
+  if(!s)return"";
+  const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s).trim());
+  if(m)return m[3]+"/"+m[2]+"/"+m[1];
+  const d=new Date(s);if(isNaN(d))return"";
+  return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+d.getFullYear();
+}
+
+async function load(){
+  let q=db.from("places").select("*").order("created_at",{ascending:false});
+  if(!admin)q=q.eq("status","visible");
+  const [p,c]=await Promise.all([q,db.from("comments").select("*").order("created_at",{ascending:true})]);
+  if(p.error){loadErr=p.error.message}else{places=p.data||[];loadErr=null}
+  comments={};
+  (c.data||[]).forEach(x=>{(comments[x.place_id]=comments[x.place_id]||[]).push(x)});
+  if(admin){const f=await db.from("feedback").select("*").order("created_at",{ascending:false});feedback=f.data||[]}
+  else feedback=[];
+  updateInbox();render();
+}
+function updateInbox(){
+  const b=$("inboxBtn");const open=feedback.filter(f=>f.status==="open").length;
+  b.hidden=!admin;b.textContent=open?("פניות ("+open+")"):"פניות";
+}
+
+async function refreshAuth(){
+  const {data:{session}}=await db.auth.getSession();
+  if(!session){admin=false;who=""}
+  else{
+    who=session.user.email||"";
+    const {data}=await db.rpc("is_admin");
+    admin=!!data;
+    if(!admin)toast("מחובר כ-"+who+", אבל הכתובת הזאת לא מוגדרת כמנהל");
+  }
+  $("adminbar").hidden=!admin;$("adminWho").textContent=who;
+  await load();
+}
+db.auth.onAuthStateChange(()=>{refreshAuth()});
+
+function buildNav(){
+  const n=$("nav");n.innerHTML="";
+  const all=document.createElement("a");all.href="#/";all.textContent="הכול";
+  if(route==="home")all.setAttribute("aria-current","page");
+  n.append(all);
+  CATEGORIES.forEach(c=>{
+    if(!inCat(c).length)return;
+    const a=document.createElement("a");a.href="#/"+c.slug;a.textContent=c.nav;
+    if(route!=="home"&&route!=="inbox"&&route!=="about"&&route.slug===c.slug)a.setAttribute("aria-current","page");
+    n.append(a);
+  });
+}
+
+function chip(label,on){const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;b.setAttribute("aria-pressed",on?"true":"false");return b}
+
+function match(pl){
+  const tags=pl.tags||[];
+  for(const t of state.tags)if(!tags.includes(t))return false;
+  if(state.q){
+    const body=(comments[pl.id]||[]).map(c=>c.body+" "+c.author).join(" ");
+    const h=[pl.name,pl.note,tags.join(" "),tags.map(tagHe).join(" "),catHe(pl.category),pl.added_by,body].join(" ").toLowerCase();
+    if(!state.q.toLowerCase().split(/\s+/).filter(Boolean).every(w=>h.includes(w)))return false}
+  return true;
+}
+
+function threadEl(pl){
+  const box=document.createElement("div");box.className="threads";
+  (comments[pl.id]||[]).forEach(c=>{
+    const d=document.createElement("div");d.className="cmt";
+    d.innerHTML='<div class="who"><span dir="auto">'+esc(c.author)+'</span><span>'+niceDate(c.created_at)+'</span></div>'+
+      '<p dir="auto">'+esc(c.body)+'</p>';
+    if(admin){
+      const del=document.createElement("button");del.className="del";del.textContent="מחיקה";
+      del.onclick=async()=>{
+        const {error}=await db.from("comments").delete().eq("id",c.id);
+        if(error){toast("לא הצלחנו למחוק — "+error.message);return}
+        comments[pl.id]=comments[pl.id].filter(x=>x.id!==c.id);render();toast("התגובה נמחקה");
+      };
+      d.querySelector(".who").append(del);
+    }
+    box.append(d);
+  });
+  const f=document.createElement("form");f.className="cform";
+  f.innerHTML='<span class="ask">איך הייתה החוויה שלך שם? משהו השתנה?</span>'+
+    '<input class="c_by" maxlength="60" placeholder="השם שלך" required>'+
+    '<textarea class="c_body" maxlength="600" dir="auto" placeholder="מה היה לך שם, מה כדאי לדעת, או מה השתנה מאז" required></textarea>'+
+    '<div class="sheetfoot"><button type="submit" class="btn btn-sm btn-primary">פרסום תגובה</button></div>';
+  try{const n=localStorage.getItem("danang_name");if(n)f.querySelector(".c_by").value=n}catch(e){}
+  f.addEventListener("submit",async e=>{
+    e.preventDefault();
+    const btn=f.querySelector("button");btn.disabled=true;btn.textContent="מפרסם…";
+    const row={place_id:pl.id,author:f.querySelector(".c_by").value.trim(),body:f.querySelector(".c_body").value.trim()};
+    const {data,error}=await db.from("comments").insert(row).select().single();
+    if(error){btn.disabled=false;btn.textContent="פרסום תגובה";toast("לא הצלחנו לפרסם — "+error.message);return}
+    try{localStorage.setItem("danang_name",row.author)}catch(e){}
+    (comments[pl.id]=comments[pl.id]||[]).push(data);
+    render();toast("התגובה נוספה");
+  });
+  box.append(f);
+  return box;
+}
+
+function contactHTML(pl){
+  const v=(pl.phone||"").trim();
+  if(!v)return"";
+  if(/^https?:\/\//i.test(v)){
+    const wa=/wa\.me|wa\.link|whatsapp/i.test(v);
+    return '<p class="kicker"><a class="contact" href="'+esc(v)+'" target="_blank" rel="noopener">'+(wa?"שליחת הודעה בוואטסאפ":"פתיחת הקישור")+'</a></p>';
+  }
+  const digits=v.replace(/[^\d+]/g,"");
+  if(digits.length>=7)return '<p class="kicker"><a class="contact" href="tel:'+esc(digits)+'" dir="ltr">'+esc(v)+'</a></p>';
+  return '<p class="kicker" dir="auto">'+esc(v)+'</p>';
+}
+
+function cardEl(pl){
+  const tags=pl.tags||[];
+  const n=(comments[pl.id]||[]).length;
+  const c=document.createElement("article");
+  c.className="card"+(pl.justAdded?" fresh":"")+(pl.status==="hidden"?" hid":"");
+  const bits=[];
+  if(pl.status==="hidden")bits.push('<span class="hidflag">מוסתר</span>');
+  if(isRecent(pl))bits.push('<span class="newflag">חדש</span>');
+  if(route==="home")bits.push('<span class="cat">'+esc(catHe(pl.category))+'</span>');
+  c.innerHTML='<h3 dir="auto">'+esc(pl.name)+'</h3>'+
+    (bits.length?'<div class="kicker">'+bits.join("")+'</div>':'')+
+    (pl.note?'<p class="note-text" dir="auto">'+esc(pl.note)+'</p>':'')+
+    contactHTML(pl)+
+    '<div class="tags">'+tags.map(t=>'<span class="t'+(state.tags.has(t)?" hit":"")+'">'+esc(tagHe(t))+'</span>').join("")+'</div>'+
+    '<div class="cardfoot"><span class="byline"><span dir="auto">'+esc(pl.added_by)+'</span>'+(pl.visited_on?'<span>· '+niceDate(pl.visited_on)+'</span>':'')+'</span>'+
+      (pl.url?'<a href="'+esc(pl.url)+'" target="_blank" rel="noopener">'+(isMaps(pl.url)?"פתיחה במפות":"פתיחת הקישור")+' ↗</a>':'')+'</div>';
+  const open=openThreads.has(pl.id);
+  const tog=document.createElement("button");tog.className="cbtn";
+  tog.textContent=open?"הסתרת התגובות":(n?(n===1?"תגובה אחת":n+" תגובות"):"הוספת תגובה");
+  tog.onclick=()=>{open?openThreads.delete(pl.id):openThreads.add(pl.id);render()};
+  c.append(tog);
+  if(open)c.append(threadEl(pl));
+  if(admin){
+    const row=document.createElement("div");row.className="adminrow";
+    if(pendingDelete===pl.id){
+      row.innerHTML='<span class="q">למחוק את המקום ואת התגובות שלו?</span>';
+      const yes=document.createElement("button");yes.className="btn btn-sm btn-danger";yes.textContent="מחיקה";
+      yes.onclick=()=>doDelete(pl);
+      const no=document.createElement("button");no.className="btn btn-sm";no.textContent="השארה";
+      no.onclick=()=>{pendingDelete=null;render()};
+      row.append(yes,no);
+    }else{
+      const ed=document.createElement("button");ed.className="btn btn-sm";ed.textContent="עריכה";
+      ed.onclick=()=>openForm(pl);
+      const del=document.createElement("button");del.className="btn btn-sm btn-danger";del.textContent="מחיקה";
+      del.onclick=()=>{pendingDelete=pl.id;render()};
+      row.append(ed,del);
+    }
+    c.append(row);
+  }
+  return c;
+}
+
+async function doDelete(pl){
+  const {error}=await db.from("places").delete().eq("id",pl.id);
+  if(error){toast("לא הצלחנו למחוק — "+error.message);return}
+  places=places.filter(p=>p.id!==pl.id);delete comments[pl.id];pendingDelete=null;render();
+  toast("נמחק");
+}
+
+function searchBox(ph){
+  return '<div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>'+
+   '<input id="q" type="search" placeholder="'+ph+'" dir="rtl" autocomplete="off" value="'+esc(state.q)+'"></div>';
+}
+
+function renderHome(){
+  const v=$("view");
+  const list=state.q?places.filter(match):null;
+  v.innerHTML='<section class="controls">'+searchBox("חיפוש בכל ההמלצות…")+'</section>'+
+    (list?'<div class="meta"><span class="count" id="count"></span></div><div class="grid" id="grid"></div>'
+        :'<div class="pagehead"><h2>מה אתם מחפשים?</h2><p>'+places.length+' מקומות שחבר’ה מהקבוצה באמת היו בהם והיו חוזרים אליהם. בחרו קטגוריה.</p></div><div class="tiles" id="tiles"></div>'+
+         '<section id="latest" hidden><div class="pagehead"><h2>נוספו לאחרונה</h2><p>המקומות האחרונים שהוספנו.</p></div><div class="grid" id="latestGrid"></div></section>');
+  if(list){
+    $("count").innerHTML=list.length+(list.length===1?" תוצאה":" תוצאות");
+    const g=$("grid");
+    if(!list.length)g.innerHTML='<div class="empty"><h3>לא נמצאו תוצאות</h3><p>נסו חיפוש קצר יותר, או בחרו קטגוריה למעלה.</p></div>';
+    else list.forEach(pl=>g.append(cardEl(pl)));
+  }else{
+    const t=$("tiles");
+    CATEGORIES.forEach(c=>{
+      const n=inCat(c).length;if(!n)return;
+      const a=document.createElement("a");a.className="tile";a.href="#/"+c.slug;
+      a.innerHTML='<span class="n">'+(n===1?"מקום אחד":n+" מקומות")+'</span><h3>'+esc(c.he)+'</h3><p>'+esc(c.blurb)+'</p>';
+      t.append(a);
+    });
+    const rec=recentPlaces(),sec=$("latest");
+    sec.hidden=rec.length===0;
+    if(rec.length){const g=$("latestGrid");g.innerHTML="";rec.forEach(pl=>g.append(cardEl(pl)))}
+  }
+  wireSearch();
+}
+
+function renderCategory(cat){
+  const v=$("view"),pool=inCat(cat);
+  v.innerHTML='<div class="pagehead"><h2>'+esc(cat.he)+'</h2><p>'+esc(cat.blurb)+'</p></div>'+
+    '<section class="controls">'+searchBox("חיפוש ב"+cat.nav+"…")+
+    '<div class="chiprow" id="tagRow" hidden><span class="lbl">סינון</span></div></section>'+
+    '<div class="meta"><span class="count" id="count"></span><button class="clear" id="clearBtn" hidden>ניקוי הסינון</button></div>'+
+    '<div class="grid" id="grid"></div>';
+  const used=new Set(pool.flatMap(p=>p.tags||[]));
+  const tr=$("tagRow"),tags=cat.tags.filter(t=>used.has(t));
+  tr.hidden=tags.length<2;
+  tags.forEach(t=>{const b=chip(tagHe(t),state.tags.has(t));b.onclick=()=>{state.tags.has(t)?state.tags.delete(t):state.tags.add(t);render()};tr.append(b)});
+  const list=pool.filter(match);
+  const active=state.tags.size+(state.q?1:0);
+  $("clearBtn").hidden=active===0;
+  $("clearBtn").onclick=()=>{state.q="";state.tags.clear();render()};
+  $("count").innerHTML=(list.length===1?"מקום אחד":list.length+" מקומות")+(active?' <em>· '+(active===1?"סינון אחד פעיל":active+" סינונים פעילים")+'</em>':"");
+  const g=$("grid");
+  if(!list.length)g.innerHTML='<div class="empty"><h3>אין עדיין מקומות שמתאימים</h3><p>אפשר להוריד סינון, או להוסיף את המקום בעצמכם כדי שהבא אחריכם ימצא אותו.</p></div>';
+  else list.forEach(pl=>g.append(cardEl(pl)));
+  wireSearch();
+}
+
+function renderAbout(){
+  $("view").innerHTML='<div class="pagehead"><h2>על האתר</h2></div><div class="prose">'+
+  '<p class="lead">זה ריכוז ההמלצות של החבר’ה הישראלים בדה נאנג. כל מקום פה הוא מקום שמישהו מאיתנו באמת היה בו.</p>'+
+  '<h3>מה כדאי להוסיף</h3>'+
+  '<p>רק מקומות שהייתם בהם בעצמכם ושווה לנסוע בשבילם. אם מקום נמצא כאן, זה אומר שהוא מספיק טוב כדי ללכת אליו במיוחד — וזה בדיוק מה שמבדיל את האתר מקובץ אקסל שיש בו הכול.</p>'+
+  '<h3>תגובות</h3>'+
+  '<p>לכל מקום אפשר להוסיף תגובה. היא נועדה ל:</p>'+
+  '<ul><li>החוויה שלכם שם, גם אם היא שונה ממי שהמליץ</li>'+
+  '<li>מידע שחסר — מה כדאי להזמין, מתי עמוס, מה לא לעשות</li>'+
+  '<li>עדכון כשמשהו השתנה — מחיר, כתובת, שעות או איכות</li></ul>'+
+  '</div>';
+}
+
+function wireSearch(){
+  const el=$("q");if(!el)return;
+  el.addEventListener("input",e=>{state.q=e.target.value;const p=el.selectionStart;render();const n=$("q");if(n){n.focus();try{n.setSelectionRange(p,p)}catch(e){}}});
+}
+
+function render(){
+  buildNav();
+  const v=$("view");
+  if(loadErr){v.innerHTML='<div class="grid"><div class="empty"><h3>לא הצלחנו לטעון את הרשימה</h3><p>'+esc(loadErr)+'. בדקו את החיבור לאינטרנט ורעננו את הדף.</p></div></div>';return}
+  if(route==="about")return renderAbout();
+  if(!places.length){v.innerHTML='<div class="grid"><div class="empty"><h3>טוען…</h3></div></div>';return}
+  if(route==="inbox")return renderInbox();
+  route==="home"?renderHome():renderCategory(route);
+}
+
+function readHash(){
+  const s=(location.hash||"").replace(/^#\/?/,"");
+  if(s==="admin"){history.replaceState(null,"","#/");if(!admin)setTimeout(openSignIn,0)}
+  const c=bySlug(s);
+  let next="home";
+  if(s==="about")next="about";
+  else if(s==="inbox"&&admin)next="inbox";
+  else if(c)next=c;
+  if(next!==route){route=next;state.q="";state.tags.clear();pendingDelete=null;openThreads.clear()}
+  render();window.scrollTo(0,0);
+}
+addEventListener("hashchange",readHash);
+
+$("themeBtn").onclick=()=>{const d=document.documentElement,cur=d.getAttribute("data-theme"),sys=matchMedia("(prefers-color-scheme: dark)").matches;
+  d.setAttribute("data-theme",(cur?cur==="dark":sys)?"light":"dark")};
+$("signOutBtn").onclick=async()=>{await db.auth.signOut();toast("יצאת מהחשבון")};
+$("aboutBtn").onclick=()=>{location.hash="#/about"};
+
+let scrim=null,sheetGuard=null;
+function closeSheet(){const c=document.querySelector(".confirm");if(c)c.remove();if(scrim){scrim.remove();scrim=null;sheetGuard=null;document.removeEventListener("keydown",onEsc)}}
+function onEsc(e){
+  if(e.key!=="Escape")return;
+  const c=document.querySelector(".confirm");
+  if(c){c.remove();return}
+  requestClose();
+}
+function requestClose(){
+  if(!scrim)return;
+  if(sheetGuard&&sheetGuard())return askDiscard();
+  closeSheet();
+}
+function askDiscard(){
+  if(document.querySelector(".confirm"))return;
+  const w=document.createElement("div");w.className="confirm";
+  w.innerHTML='<div class="confirmbox" role="alertdialog" aria-modal="true" aria-labelledby="cfT">'+
+    '<h2 id="cfT">למחוק את מה שכתבתם?</h2><p>כל מה שהקלדתם יימחק.</p><div class="confirmfoot"></div></div>';
+  const foot=w.querySelector(".confirmfoot");
+  const keep=document.createElement("button");keep.type="button";keep.className="btn";keep.textContent="חזרה לעריכה";
+  const toss=document.createElement("button");toss.type="button";toss.className="btn btn-danger";toss.textContent="מחיקה";
+  keep.onclick=()=>w.remove();
+  toss.onclick=()=>{w.remove();closeSheet()};
+  foot.append(keep,toss);
+  w.addEventListener("click",e=>{if(e.target===w)w.remove()});
+  document.body.append(w);keep.focus();
+}
+function openSheet(html){
+  closeSheet();
+  scrim=document.createElement("div");scrim.className="scrim";
+  scrim.innerHTML='<div class="sheet" role="dialog" aria-modal="true">'+html+'</div>';
+  document.body.append(scrim);
+  document.addEventListener("keydown",onEsc);
+  scrim.addEventListener("click",e=>{if(e.target===scrim)requestClose()});
+}
+
+function openFeedback(kind){
+  const bug=kind==="bug";
+  openSheet('<h2>'+(bug?"דיווח על תקלה":"רעיון לשיפור")+'</h2>'+
+   '<div class="sub">'+(bug?"מה לא עבד, ומה ניסיתם לעשות כשזה קרה?":"מה יעשה את האתר שימושי יותר בשבילכם?")+'</div>'+
+   '<form id="fbForm">'+
+   '<div class="field"><label for="fb_body">'+(bug?"מה קרה":"הרעיון שלכם")+'</label><textarea id="fb_body" dir="auto" maxlength="1000" required></textarea></div>'+
+   '<div class="field"><label for="fb_by">השם שלכם</label><input id="fb_by" maxlength="60" placeholder="לא חובה, אבל עוזר אם צריך לשאול משהו"></div>'+
+   '<div class="sheetfoot"><button type="button" class="btn" id="cancelBtn">ביטול</button><button type="submit" class="btn btn-primary" id="fbSend">שליחה</button></div>'+
+   '</form>');
+  $("cancelBtn").onclick=requestClose;
+  try{const n=localStorage.getItem("danang_name");if(n)$("fb_by").value=n}catch(e){}
+  const snap=()=>$("fb_body").value+"\u0000"+$("fb_by").value;
+  const initial=snap();sheetGuard=()=>snap()!==initial;
+  $("fb_body").focus();
+  $("fbForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const b=$("fbSend");b.disabled=true;b.textContent="שולח…";
+    const row={kind:kind,body:$("fb_body").value.trim(),author:$("fb_by").value.trim()||null,page:(location.hash||"#/").slice(0,120)};
+    const {error}=await db.from("feedback").insert(row);
+    if(error){b.disabled=false;b.textContent="שליחה";toast("לא הצלחנו לשלוח — "+error.message);return}
+    try{if(row.author)localStorage.setItem("danang_name",row.author)}catch(e){}
+    sheetGuard=null;closeSheet();
+    toast(bug?"תודה — הדיווח נשלח":"תודה — הרעיון נשלח");
+  });
+}
+$("bugBtn").onclick=()=>openFeedback("bug");
+$("ideaBtn").onclick=()=>openFeedback("idea");
+$("bugBtn2").onclick=()=>openFeedback("bug");
+$("ideaBtn2").onclick=()=>openFeedback("idea");
+$("inboxBtn").onclick=()=>{location.hash="#/inbox"};
+
+function renderInbox(){
+  const v=$("view");
+  v.innerHTML='<div class="pagehead"><h2>פניות</h2><p>תקלות ורעיונות שנשלחו מהאתר. רק אתה רואה אותם.</p></div><div class="fb" id="fbList"></div>';
+  const l=$("fbList");
+  if(!feedback.length){l.innerHTML='<div class="empty"><h3>אין עדיין פניות</h3><p>דיווחים ורעיונות מהקבוצה יופיעו כאן.</p></div>';return}
+  feedback.forEach(f=>{
+    const d=document.createElement("div");d.className="fbitem"+(f.status==="done"?" done":"");
+    d.innerHTML='<div class="fbtop"><span class="fbkind '+(f.kind==="bug"?"bug":"")+'">'+(f.kind==="bug"?"תקלה":"רעיון")+'</span>'+
+      '<span>'+niceDate(f.created_at)+'</span>'+(f.author?'<span dir="auto">'+esc(f.author)+'</span>':'')+
+      (f.page&&f.page!=="#/"?'<span dir="ltr">'+esc(f.page)+'</span>':'')+'</div>'+
+      '<p class="note-text" dir="auto">'+esc(f.body)+'</p>';
+    const row=document.createElement("div");row.className="adminrow";
+    const mark=document.createElement("button");mark.className="btn btn-sm";mark.textContent=f.status==="done"?"פתיחה מחדש":"סימון כטופל";
+    mark.onclick=async()=>{
+      const next=f.status==="done"?"open":"done";
+      const {error}=await db.from("feedback").update({status:next}).eq("id",f.id);
+      if(error){toast("לא הצלחנו לעדכן — "+error.message);return}
+      f.status=next;updateInbox();render();
+    };
+    const del=document.createElement("button");del.className="btn btn-sm btn-danger";del.textContent="מחיקה";
+    del.onclick=async()=>{
+      const {error}=await db.from("feedback").delete().eq("id",f.id);
+      if(error){toast("לא הצלחנו למחוק — "+error.message);return}
+      feedback=feedback.filter(x=>x.id!==f.id);updateInbox();render();toast("נמחק");
+    };
+    row.append(mark,del);d.append(row);l.append(d);
+  });
+}
+
+function openSignIn(){
+  openSheet('<h2>כניסת מנהל</h2><div class="sub">נשלח לכם קישור במייל. פתחו אותו במכשיר הזה.</div>'+
+    '<form id="signinForm"><div class="field"><label for="f_em">כתובת מייל</label><input id="f_em" type="email" dir="ltr" required placeholder="you@example.com"></div>'+
+    '<div class="sheetfoot"><button type="button" class="btn" id="cancelBtn">ביטול</button><button type="submit" class="btn btn-primary" id="linkBtn">שליחת קישור</button></div></form>');
+  $("cancelBtn").onclick=requestClose;$("f_em").focus();
+  $("signinForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const b=$("linkBtn");b.disabled=true;b.textContent="שולח…";
+    const {error}=await db.auth.signInWithOtp({email:$("f_em").value.trim(),options:{emailRedirectTo:location.origin+location.pathname}});
+    closeSheet();
+    toast(error?("לא הצלחנו לשלוח — "+error.message):"נשלח קישור למייל");
+  });
+}
+
+function openForm(pl){
+  const editing=!!pl;
+  openSheet('<h2>'+(editing?"עריכת מקום":"הוספת מקום")+'</h2>'+
+   (editing?'<div class="sub">השינויים נכנסים לאתר מיד.</div>'
+          :'<div class="bar"><b>רק מקומות ששווה לנסוע בשבילם.</b> כאלה שהייתם בהם בעצמכם והייתם חוזרים אליהם.</div>')+
+   '<form id="placeForm">'+
+   '<div class="two"><div class="field"><label for="f_n">שם המקום</label><input id="f_n" required dir="auto" placeholder="למשל Nam House Coffee"></div>'+
+   '<div class="field"><label for="f_d">מתי היית</label><input id="f_d" type="date" required></div></div>'+
+   '<div class="field"><label for="f_c">קטגוריה</label><select id="f_c">'+CATEGORIES.map(c=>'<option value="'+c.name+'">'+c.he+'</option>').join("")+'</select></div>'+
+   '<div class="field"><label>סינון</label><div class="chiprow" id="f_tags" style="margin-top:0"></div><span class="hint">סמנו כל מה שמתאים — לפי זה אנשים מחפשים.</span></div>'+
+   '<div class="field"><label for="f_u">קישור</label><input id="f_u" type="url" dir="ltr" placeholder="https://maps.app.goo.gl/…"></div>'+
+   '<div class="field"><label for="f_ph">טלפון או וואטסאפ</label><input id="f_ph" maxlength="200" dir="ltr" placeholder="+84 90 123 4567 או קישור wa.me"></div>'+
+   '<div class="field"><label for="f_x">למה שווה ללכת לשם</label><textarea id="f_x" dir="auto" maxlength="600"></textarea><span class="hint">מחיר — רק אם הוא באמת העניין. נשארו <span id="cc">600</span> תווים.</span></div>'+
+   '<div class="two even"><div class="field"><label for="f_by">ממליץ/ה</label><input id="f_by" required maxlength="60" placeholder="כדי שידעו מי היה שם"></div>'+
+   (admin?'<div class="field"><label for="f_st">נראות</label><select id="f_st"><option value="visible">מוצג</option><option value="hidden">מוסתר</option></select></div>':'<div></div>')+'</div>'+
+   '<div class="sheetfoot"><button type="button" class="btn" id="cancelBtn">ביטול</button><button type="submit" class="btn btn-primary" id="saveBtn">'+(editing?"שמירת השינויים":"הוספה")+'</button></div>'+
+   '</form>');
+  $("cancelBtn").onclick=requestClose;
+  const chosen=new Set(editing?(pl.tags||[]):[]);
+  const snap=()=>["f_n","f_d","f_c","f_u","f_ph","f_x","f_by","f_st"].map(id=>{const el=$(id);return el?el.value:""}).join("\u0000")+"\u0000"+[...chosen].sort().join(",");
+  const paint=()=>{const box=$("f_tags");box.innerHTML="";
+    (byName($("f_c").value)||CATEGORIES[0]).tags.forEach(t=>{const b=chip(tagHe(t),chosen.has(t));b.onclick=()=>{chosen.has(t)?chosen.delete(t):chosen.add(t);paint()};box.append(b)})};
+  $("f_d").value=(editing&&pl.visited_on)?pl.visited_on:today();
+  if(editing){
+    $("f_n").value=pl.name||"";$("f_c").value=pl.category;
+    $("f_u").value=pl.url||"";$("f_ph").value=pl.phone||"";$("f_x").value=pl.note||"";
+    $("f_by").value=pl.added_by||"";if($("f_st"))$("f_st").value=pl.status||"visible";
+    $("cc").textContent=600-($("f_x").value.length);
+  }else if(route!=="home"&&route!=="inbox"&&route!=="about")$("f_c").value=route.name;
+  $("f_c").addEventListener("change",()=>{
+    const keep=[...chosen].filter(t=>(byName($("f_c").value)||{tags:[]}).tags.includes(t));
+    chosen.clear();keep.forEach(t=>chosen.add(t));paint()});
+  paint();
+  $("f_x").addEventListener("input",e=>{$("cc").textContent=600-e.target.value.length});
+  if(!editing){try{const n=localStorage.getItem("danang_name");if(n)$("f_by").value=n}catch(e){}}
+  const initial=snap();sheetGuard=()=>snap()!==initial;
+  $("f_n").focus();
+  $("placeForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const btn=$("saveBtn");btn.disabled=true;btn.textContent="שומר…";
+    const row={name:$("f_n").value.trim(),category:$("f_c").value,tags:[...chosen],visited_on:$("f_d").value||null,
+      url:$("f_u").value.trim()||null,phone:$("f_ph").value.trim()||null,note:$("f_x").value.trim()||null,added_by:$("f_by").value.trim()};
+    if(admin&&$("f_st"))row.status=$("f_st").value;
+    try{
+      let saved;
+      if(editing){
+        const {data,error}=await db.from("places").update(row).eq("id",pl.id).select().single();
+        if(error)throw error;saved=data;places=places.map(p=>p.id===saved.id?saved:p);
+      }else{
+        const {data,error}=await db.from("places").insert(row).select().single();
+        if(error)throw error;saved=data;saved.justAdded=true;places.unshift(saved);
+        try{localStorage.setItem("danang_name",row.added_by)}catch(e){}
+      }
+      sheetGuard=null;closeSheet();
+      const cat=byName(saved.category);
+      state.q="";state.tags.clear();
+      if(cat&&location.hash!=="#/"+cat.slug&&!editing){location.hash="#/"+cat.slug}else{render()}
+      toast(editing?"נשמר":"נוסף — תודה");
+    }catch(err){
+      btn.disabled=false;btn.textContent=editing?"שמירת השינויים":"הוספה";
+      toast("לא הצלחנו לשמור — "+(err.message||"בדקו את שדה הקישור ונסו שוב"));
+    }
+  });
+}
+$("addBtn").onclick=()=>openForm(null);
+
+function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),3200)}
+readHash();
+refreshAuth();
+</script>
+
+</body>
+</html>
