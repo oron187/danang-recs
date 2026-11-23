@@ -248,7 +248,7 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 const isMaps=u=>/goo\.gl|google\.[a-z.]+\/maps|maps\.app/.test(u||"");
 const inCat=c=>places.filter(p=>p.category===c.name);
-const NEW_DAYS=7, NEW_MAX=5;
+const NEW_DAYS=7, NEW_MAX=6;
 function isRecent(pl){
   if(pl.imported||!pl.created_at)return false;
   const age=Date.now()-new Date(pl.created_at).getTime();
