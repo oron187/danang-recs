@@ -177,6 +177,11 @@ nav.cats a[aria-current="page"]{color:#fff;border-bottom-color:#fff;font-weight:
 .two{display:grid;grid-template-columns:2fr 1fr;gap:12px}
 .even{grid-template-columns:1fr 1fr}
 @media(max-width:460px){.two{grid-template-columns:1fr}}
+.dupe{background:rgba(178,89,15,.10);border:1px solid var(--warm);border-radius:10px;padding:10px 12px;margin:-4px 0 13px;font-size:13.5px}
+.dupe b{display:block;color:var(--warm);margin-bottom:5px}
+.dupe ul{margin:0 0 6px;padding-inline-start:18px}
+.dupe li{margin:2px 0}
+.dupe li span{color:var(--muted)}
 .hint{font-size:12px;color:var(--muted)}
 .sheetfoot{display:flex;gap:9px;justify-content:flex-end;margin-top:6px;align-items:center;flex-wrap:wrap}
 .confirm{position:fixed;inset:0;z-index:60;background:rgba(7,21,41,.6);display:flex;align-items:center;justify-content:center;
@@ -272,6 +277,31 @@ function isRecent(pl){
 function recentPlaces(){
   return places.filter(p=>p.status!=="hidden"&&!p.imported&&p.created_at)
     .sort((a,b)=>(b.created_at||"").localeCompare(a.created_at||"")).slice(0,NEW_MAX);
+}
+const NOISE=/\b(the|a|an|cafe|caf\u00e9|coffee|restaurant|resto|bar|shop|store|da nang|danang|vietnam)\b/g;
+const normName=x=>String(x||"").toLowerCase().replace(/[\u0591-\u05C7]/g,"")
+  .replace(/[^\p{L}\p{N}]+/gu," ").replace(NOISE," ").replace(/\s+/g," ").trim();
+const GENERIC=new Set(["clinic","dental","dentist","market","mart","bakery","hospital","pharmacy","spa",
+  "kitchen","food","express","visa","visas","bank","atm","gym","fitness","salon","studio","center","centre",
+  "rental","apartments","hotel","\u05db\u05e1\u05e4\u05d5\u05de\u05d8","\u05d5\u05d9\u05d6\u05d5\u05ea","\u05de\u05e1\u05e2\u05d3\u05d4","\u05e7\u05e4\u05d4"]);
+function nameScore(a,b){
+  if(!a||!b)return 0;
+  if(a===b)return 1;
+  const ca=a.replace(/\s+/g,""),cb=b.replace(/\s+/g,"");
+  if(ca===cb)return .95;
+  if(ca.length>4&&cb.length>4&&(ca.includes(cb)||cb.includes(ca)))return .9;
+  let A=new Set(a.split(" ")),B=new Set(b.split(" "));
+  const sa=new Set([...A].filter(t=>!GENERIC.has(t))),sb=new Set([...B].filter(t=>!GENERIC.has(t)));
+  if(sa.size&&sb.size){A=sa;B=sb}
+  let hit=0;A.forEach(t=>{if(B.has(t))hit++});
+  return hit/Math.max(A.size,B.size);
+}
+function similarPlaces(raw,skipId){
+  const q=normName(raw);
+  if(q.length<3)return [];
+  return places.filter(p=>p.id!==skipId)
+    .map(p=>({p,s:nameScore(q,normName(p.name))}))
+    .filter(x=>x.s>=.6).sort((a,b)=>b.s-a.s).slice(0,3).map(x=>x.p);
 }
 const today=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 function niceDate(s){
@@ -654,6 +684,7 @@ function openForm(pl){
    '<form id="placeForm">'+
    '<div class="two"><div class="field"><label for="f_n">שם המקום</label><input id="f_n" required dir="auto" placeholder="למשל Nam House Coffee"></div>'+
    '<div class="field"><label for="f_d">מתי היית</label><input id="f_d" type="date" required></div></div>'+
+   '<div class="dupe" id="dupe" hidden></div>'+
    '<div class="field"><label for="f_c">קטגוריה</label><select id="f_c">'+CATEGORIES.map(c=>'<option value="'+c.name+'">'+c.he+'</option>').join("")+'</select></div>'+
    '<div class="field"><label>סינון</label><div class="chiprow" id="f_tags" style="margin-top:0"></div><span class="hint">סמנו כל מה שמתאים — לפי זה אנשים מחפשים.</span></div>'+
    '<div class="field"><label for="f_u">קישור</label><input id="f_u" type="url" dir="ltr" placeholder="https://maps.app.goo.gl/…"></div>'+
@@ -680,6 +711,17 @@ function openForm(pl){
     chosen.clear();keep.forEach(t=>chosen.add(t));paint()});
   paint();
   $("f_x").addEventListener("input",e=>{$("cc").textContent=600-e.target.value.length});
+  const dupeBox=$("dupe");let dupeTimer=null;
+  const paintDupes=()=>{
+    const hits=similarPlaces($("f_n").value,editing?pl.id:null);
+    if(!hits.length){dupeBox.hidden=true;dupeBox.innerHTML="";return}
+    dupeBox.hidden=false;
+    dupeBox.innerHTML='<b>יש כבר משהו דומה באתר</b><ul>'+
+      hits.map(h=>'<li dir="auto">'+esc(h.name)+' <span>· '+esc(catHe(h.category))+'</span></li>').join("")+
+      '</ul><span class="hint">אם זה אותו מקום — עדיף להוסיף תגובה על הרשומה הקיימת במקום להוסיף אותו שוב.</span>';
+  };
+  $("f_n").addEventListener("input",()=>{clearTimeout(dupeTimer);dupeTimer=setTimeout(paintDupes,220)});
+  if(editing)paintDupes();
   if(!editing){try{const n=localStorage.getItem("danang_name");if(n)$("f_by").value=n}catch(e){}}
   const initial=snap();sheetGuard=()=>snap()!==initial;
   $("f_n").focus();
